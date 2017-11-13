@@ -6,8 +6,22 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(janitor)
 ```
 
-## R Markdown
+This file completes Problem 1 of P8105 HW4.
+
+## Data cleaning 
+
+```{r}
+pup_data = read_csv("data/FAS_pups.csv") %>%
+  clean_names() %>%
+  gather(key = outcome, value = postnatal_day, starts_with("pd_")) %>%
+  separate(outcome, into = c("remove", "outcome"), sep = "_") %>%
+  select(litter_number, sex, outcome, postnatal_day) %>%
+  mutate(sex = recode(sex, `1` = "male", `2` = "female"))
+```
 
