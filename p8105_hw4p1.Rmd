@@ -28,6 +28,8 @@ pup_data = read_csv("data/FAS_pups.csv") %>%
 
 ## Plotting data
 
+The violin plot below shows the distribution of post-natal days for each developmental landmark.
+
 ```{r plot_data}
 pup_data %>%
   filter(!is.na(postnatal_day)) %>%
