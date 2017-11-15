@@ -16,7 +16,7 @@ This file completes Problem 1 of P8105 HW4.
 
 ## Data cleaning 
 
-```{r}
+```{r clean_data}
 pup_data = read_csv("data/FAS_pups.csv") %>%
   clean_names() %>%
   gather(key = outcome, value = postnatal_day, starts_with("pd_")) %>%
@@ -25,3 +25,13 @@ pup_data = read_csv("data/FAS_pups.csv") %>%
   mutate(sex = recode(sex, `1` = "male", `2` = "female"))
 ```
 
+
+## Plotting data
+
+```{r plot_data}
+pup_data %>%
+  filter(!is.na(postnatal_day)) %>%
+  mutate(outcome = forcats::fct_reorder(outcome, postnatal_day)) %>%
+  ggplot(aes(x = outcome, y = postnatal_day)) + 
+  geom_violin()
+```
