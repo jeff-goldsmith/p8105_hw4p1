@@ -16,6 +16,8 @@ This file completes Problem 1 of P8105 HW4.
 
 ## Data cleaning 
 
+First, we load and clean the data in `FAS_pups.csv`. This process includes reformatting variable names; creating separate variables containing outcomes of interest and the postnatal day on which those outcomes were observed; and recoding sex to a character variable.
+
 ```{r clean_data}
 pup_data = read_csv("data/FAS_pups.csv") %>%
   clean_names() %>%
@@ -37,3 +39,5 @@ pup_data %>%
   ggplot(aes(x = outcome, y = postnatal_day)) + 
   geom_violin()
 ```
+
+The order in which landmarks are achieved is biologically plausible -- ears "work" before the pup is able to pivot, pups are able to pivot before walking, and walking precedes eyes opening.
